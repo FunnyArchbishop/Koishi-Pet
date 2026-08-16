@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(DeskPetQt VERSION 1.0 LANGUAGES CXX)
+project(DeskPetQt VERSION 1.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,6 +15,12 @@ add_executable(KoishiPet WIN32
     sprite_loader.h
     pet_state.h
 )
+
+# Windows 资源文件: 将 assets/app_icon.ico 嵌入为 exe 图标
+if(WIN32)
+    target_sources(KoishiPet PRIVATE app.rc)
+    set_source_files_properties(app.rc PROPERTIES LANGUAGE RC)
+endif()
 
 target_include_directories(KoishiPet PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 

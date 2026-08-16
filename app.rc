@@ -1,0 +1,39 @@
+// DeskPet Qt - Windows 资源文件
+// 将 assets/app_icon.ico 嵌入为 exe 图标 (也可从资源加载 tray 图标)
+#include <windows.h>
+
+// 可执行文件图标 (也用于资源管理器/任务栏显示)
+IDI_ICON1 ICON "assets/app_icon.ico"
+
+// 版本信息
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,1,0,0
+ PRODUCTVERSION 1,1,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName", "DeskPet Qt"
+            VALUE "FileDescription", "DeskPet Qt - 古明地恋桌面宠物"
+            VALUE "FileVersion", "1.1.0"
+            VALUE "InternalName", "KoishiPet"
+            VALUE "OriginalFilename", "KoishiPet.exe"
+            VALUE "ProductName", "DeskPet Qt"
+            VALUE "ProductVersion", "1.1.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
