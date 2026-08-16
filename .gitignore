@@ -1,8 +1,8 @@
-# 编译输出
+# 缂栬瘧杈撳嚭
 build/
 output/
 
-# CMake 生成文件
+# CMake 鐢熸垚鏂囦欢
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
@@ -14,6 +14,9 @@ compile_commands.json
 *.user
 *.pro.user*
 
-# 系统文件
+# 绯荤粺鏂囦欢
 Thumbs.db
 .DS_Store
+
+.update/
+*.zip
