@@ -1,9 +1,9 @@
 /**
- * DeskPet Qt - ¾«Áé¼ÓÔØÆ÷½Ó¿Ú
+ * DeskPet Qt - ç²¾çµåŠ è½½å™¨æ¥å£
  *
- * Ö§³Ö¾²Ì¬Í¼Æ¬ (PNG/JPG/BMP) ºÍ¶¯»­ GIF¡£
- * Í¬Ãû .gif ÎÄ¼şÓÅÏÈÓÚ .png ¼ÓÔØ£¬ÊµÏÖ¶¯»­×À³è¡£
- * ÓÃ»§¿ÉÌæ»» assets/ ÏÂµÄÍ¼Æ¬/GIF ×Ô¶¨Òå½ÇÉ«¡£
+ * æ”¯æŒé™æ€å›¾ç‰‡ (PNG/JPG/BMP) å’ŒåŠ¨ç”» GIFã€‚
+ * åŒå .gif æ–‡ä»¶ä¼˜å…ˆäº .png åŠ è½½ï¼Œå®ç°åŠ¨ç”»æ¡Œå® ã€‚
+ * ç”¨æˆ·å¯æ›¿æ¢ assets/ ä¸‹çš„å›¾ç‰‡/GIF è‡ªå®šä¹‰è§’è‰²ã€‚
  */
 
 #ifndef DESKPET_SPRITE_LOADER_H
@@ -17,16 +17,16 @@
 #include <QSharedPointer>
 
 // ============================================================
-// ¾«ÁéÖ¡½á¹¹ ¡ª Ö§³Ö¾²Ì¬Í¼ & GIF ¶¯»­
+// ç²¾çµå¸§ç»“æ„ â€” æ”¯æŒé™æ€å›¾ & GIF åŠ¨ç”»
 // ============================================================
 struct SpriteFrame {
-    QPixmap pixmap;                              // ¾²Ì¬Í¼Æ¬
-    QSharedPointer<QMovie> movie;                // GIF ¶¯»­ (¹²ÏíËùÓĞÈ¨, °²È«¿½±´)
+    QPixmap pixmap;                              // é™æ€å›¾ç‰‡
+    QSharedPointer<QMovie> movie;                // GIF åŠ¨ç”» (å…±äº«æ‰€æœ‰æƒ, å®‰å…¨æ‹·è´)
 
     bool isValid() const { return !pixmap.isNull() || (movie && movie->isValid()); }
     bool isGif()    const { return movie && movie->isValid(); }
 
-    /** »ñÈ¡µ±Ç°Ö¡ (GIF ·µ»Ø¶¯»­µ±Ç°Ö¡, ¾²Ì¬·µ»ØÔ­Í¼) */
+    /** è·å–å½“å‰å¸§ (GIF è¿”å›åŠ¨ç”»å½“å‰å¸§, é™æ€è¿”å›åŸå›¾) */
     QPixmap currentFrame() const {
         if (movie && movie->state() != QMovie::NotRunning) {
             return movie->currentPixmap();
@@ -34,7 +34,7 @@ struct SpriteFrame {
         return pixmap;
     }
 
-    /** Æô¶¯ GIF ²¥·Å */
+    /** å¯åŠ¨ GIF æ’­æ”¾ */
     void startGif() {
         if (movie && movie->state() == QMovie::NotRunning) {
             movie->start();
@@ -43,24 +43,24 @@ struct SpriteFrame {
 };
 
 // ============================================================
-// ´¥·¢Ö¡Ó³Éä: ´¥·¢Ãû ¡ú ¾«ÁéÖ¡
+// è§¦å‘å¸§æ˜ å°„: è§¦å‘å â†’ ç²¾çµå¸§
 // ============================================================
 using TriggerMap = QMap<QString, SpriteFrame>;
 
 // ============================================================
-// ¼ÓÔØº¯Êı
+// åŠ è½½å‡½æ•°
 // ============================================================
 
-/** ´ÓÍ¼Æ¬ÎÄ¼ş¼ÓÔØ¾«ÁéÖ¡ (×Ô¶¯¼ì²â .gif ÓÅÏÈ) */
+/** ä»å›¾ç‰‡æ–‡ä»¶åŠ è½½ç²¾çµå¸§ (è‡ªåŠ¨æ£€æµ‹ .gif ä¼˜å…ˆ) */
 SpriteFrame loadSpriteFromFile(const QString& filePath);
 
 /**
- * °´»ù´¡Ãû¼ÓÔØ: ÏÈ³¢ÊÔ baseName.gif, ²»´æÔÚÔò baseName.png
- * ÀıÈç loadSpriteByBaseName("assets/sprite_idle") »áÏÈÕÒ sprite_idle.gif
+ * æŒ‰åŸºç¡€ååŠ è½½: å…ˆå°è¯• baseName.gif, ä¸å­˜åœ¨åˆ™ baseName.png
+ * ä¾‹å¦‚ loadSpriteByBaseName("assets/sprite_idle") ä¼šå…ˆæ‰¾ sprite_idle.gif
  */
 SpriteFrame loadSpriteByBaseName(const QString& baseNameWithoutExt);
 
-/** ´ÓÄ¿Â¼¼ÓÔØËùÓĞ´¥·¢Ö¡ (.gif ÓÅÏÈ, Æä´Î .png) */
+/** ä»ç›®å½•åŠ è½½æ‰€æœ‰è§¦å‘å¸§ (.gif ä¼˜å…ˆ, å…¶æ¬¡ .png) */
 TriggerMap loadTriggerFrames(const QString& dirPath);
 
 #endif // DESKPET_SPRITE_LOADER_H

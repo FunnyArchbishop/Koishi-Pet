@@ -1,11 +1,11 @@
 /**
- * DeskPet Qt - ³ÌĞòÈë¿Ú
+ * DeskPet Qt - ç¨‹åºå…¥å£
  *
- * ×ÀÃæ koishi Qt °æ
- * ±àÒë: cmake -B build && cmake --build build
+ * æ¡Œé¢ koishi Qt ç‰ˆ
+ * ç¼–è¯‘: cmake -B build && cmake --build build
  *
- * Ò»¸ö¿É°®µÄkoishi×À³è£¬
- * »ùÓÚ Qt6 Widgets£¬Í¸Ã÷ÖÃ¶¥ÎŞ±ß¿ò´°¿Ú
+ * ä¸€ä¸ªå¯çˆ±çš„koishiæ¡Œå® ï¼Œ
+ * åŸºäº Qt6 Widgetsï¼Œé€æ˜ç½®é¡¶æ— è¾¹æ¡†çª—å£
  */
 
 #include <QApplication>
@@ -15,10 +15,10 @@ int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     app.setApplicationName("DeskPet Qt");
     app.setApplicationVersion("1.0");
-    app.setQuitOnLastWindowClosed(false);  // ÓÒ¼ü²Ëµ¥ÍË³ö
+    app.setQuitOnLastWindowClosed(false);  // å³é”®èœå•é€€å‡º
 
     PetWindow pet;
-    // pet ´°¿Ú±£³ÖÏÔÊ¾Ö±µ½ÓÃ»§ÍË³ö
+    // pet çª—å£ä¿æŒæ˜¾ç¤ºç›´åˆ°ç”¨æˆ·é€€å‡º
 
     return app.exec();
 }

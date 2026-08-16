@@ -1,8 +1,8 @@
 /**
- * DeskPet Qt - ¾«Áé¼ÓÔØÆ÷ÊµÏÖ
+ * DeskPet Qt - ç²¾çµåŠ è½½å™¨å®ç°
  *
- * ÖÇÄÜ¼ÓÔØ: .gif ÓÅÏÈ, ·ñÔò»ØÍËµ½ .png/.jpg/.bmp¡£
- * GIF Ê¹ÓÃ QMovie Çı¶¯¶¯»­, ¾²Ì¬Í¼Ê¹ÓÃ QPixmap¡£
+ * æ™ºèƒ½åŠ è½½: .gif ä¼˜å…ˆ, å¦åˆ™å›é€€åˆ° .png/.jpg/.bmpã€‚
+ * GIF ä½¿ç”¨ QMovie é©±åŠ¨åŠ¨ç”», é™æ€å›¾ä½¿ç”¨ QPixmapã€‚
  */
 
 #include "sprite_loader.h"
@@ -12,7 +12,7 @@
 #include <QFileInfoList>
 
 // ============================================================
-// ´ÓÍ¼Æ¬ÎÄ¼ş¼ÓÔØ (×Ô¶¯¼ì²â¸ñÊ½)
+// ä»å›¾ç‰‡æ–‡ä»¶åŠ è½½ (è‡ªåŠ¨æ£€æµ‹æ ¼å¼)
 // ============================================================
 SpriteFrame loadSpriteFromFile(const QString& filePath) {
     SpriteFrame result;
@@ -23,7 +23,7 @@ SpriteFrame loadSpriteFromFile(const QString& filePath) {
     QString suffix = fi.suffix().toLower();
 
     if (suffix == "gif") {
-        // ---- GIF ¶¯»­ ----
+        // ---- GIF åŠ¨ç”» ----
         result.movie.reset(new QMovie(filePath));
         if (result.movie->isValid()) {
             result.movie->start();
@@ -32,7 +32,7 @@ SpriteFrame loadSpriteFromFile(const QString& filePath) {
             result.movie.clear();
         }
     } else {
-        // ---- ¾²Ì¬Í¼Æ¬ ----
+        // ---- é™æ€å›¾ç‰‡ ----
         result.pixmap = QPixmap(filePath);
     }
 
@@ -40,27 +40,27 @@ SpriteFrame loadSpriteFromFile(const QString& filePath) {
 }
 
 // ============================================================
-// °´»ù´¡Ãû¼ÓÔØ: xxx.gif ÓÅÏÈ ¡ú xxx.png »ØÍË
+// æŒ‰åŸºç¡€ååŠ è½½: xxx.gif ä¼˜å…ˆ â†’ xxx.png å›é€€
 // ============================================================
 SpriteFrame loadSpriteByBaseName(const QString& baseNameWithoutExt) {
-    // ÏÈ³¢ÊÔ GIF
+    // å…ˆå°è¯• GIF
     QString gifPath = baseNameWithoutExt + ".gif";
     if (QFileInfo::exists(gifPath)) {
         return loadSpriteFromFile(gifPath);
     }
 
-    // »ØÍËµ½ PNG
+    // å›é€€åˆ° PNG
     QString pngPath = baseNameWithoutExt + ".png";
     if (QFileInfo::exists(pngPath)) {
         return loadSpriteFromFile(pngPath);
     }
 
-    // ×îºó³¢ÊÔÔ­Ê¼Â·¾¶ (¿ÉÄÜÊÇÆäËû¸ñÊ½)
+    // æœ€åå°è¯•åŸå§‹è·¯å¾„ (å¯èƒ½æ˜¯å…¶ä»–æ ¼å¼)
     return loadSpriteFromFile(baseNameWithoutExt);
 }
 
 // ============================================================
-// ´ÓÄ¿Â¼¼ÓÔØ´¥·¢Ö¡ (.gif ÓÅÏÈ)
+// ä»ç›®å½•åŠ è½½è§¦å‘å¸§ (.gif ä¼˜å…ˆ)
 // ============================================================
 TriggerMap loadTriggerFrames(const QString& dirPath) {
     TriggerMap triggers;
@@ -68,8 +68,8 @@ TriggerMap loadTriggerFrames(const QString& dirPath) {
     QDir dir(dirPath);
     if (!dir.exists()) return triggers;
 
-    // ÊÕ¼¯ËùÓĞ gif ºÍ png ÎÄ¼ş, gif ÓÅÏÈ
-    QMap<QString, QString> bestFiles; // baseName ¡ú fullPath
+    // æ”¶é›†æ‰€æœ‰ gif å’Œ png æ–‡ä»¶, gif ä¼˜å…ˆ
+    QMap<QString, QString> bestFiles; // baseName â†’ fullPath
 
     QStringList filters = {"*.gif", "*.png"};
     QFileInfoList files = dir.entryInfoList(filters, QDir::Files);
@@ -77,13 +77,13 @@ TriggerMap loadTriggerFrames(const QString& dirPath) {
     for (const QFileInfo& info : files) {
         QString name = info.completeBaseName();
         QString path = info.absoluteFilePath();
-        // gif ÓÅÏÈ: Èç¹ûÒÑ´æÔÚÔòÌø¹ı png
+        // gif ä¼˜å…ˆ: å¦‚æœå·²å­˜åœ¨åˆ™è·³è¿‡ png
         if (!bestFiles.contains(name) || info.suffix().toLower() == "gif") {
             bestFiles[name] = path;
         }
     }
 
-    // ¼ÓÔØ
+    // åŠ è½½
     for (auto it = bestFiles.begin(); it != bestFiles.end(); ++it) {
         SpriteFrame frame = loadSpriteFromFile(it.value());
         if (frame.isValid()) {

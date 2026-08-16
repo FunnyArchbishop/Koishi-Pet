@@ -1,8 +1,8 @@
 /**
- * DeskPet Qt - koishi×´Ì¬ & ÅäÖÃ³£Á¿
+ * DeskPet Qt - koishiçŠ¶æ€ & é…ç½®å¸¸é‡
  *
- * ×ÀÃækoishi Qt °æ ¡ª ×´Ì¬Ã¶¾Ù & ¿Éµ÷²ÎÊı
- * Ê¹ÓÃÍ¼Æ¬ÎÄ¼ş (PNG) ×÷ÎªkoishiËØ²Ä£¬Ö§³ÖÍ¸Ã÷Í¨µÀ
+ * æ¡Œé¢koishi Qt ç‰ˆ â€” çŠ¶æ€æšä¸¾ & å¯è°ƒå‚æ•°
+ * ä½¿ç”¨å›¾ç‰‡æ–‡ä»¶ (PNG) ä½œä¸ºkoishiç´ æï¼Œæ”¯æŒé€æ˜é€šé“
  */
 
 #ifndef DESKPET_PET_STATE_H
@@ -11,22 +11,42 @@
 #include <QString>
 
 // ============================================================
-// ÏÔÊ¾³ß´ç
+// æ˜¾ç¤ºå°ºå¯¸
 // ============================================================
-constexpr int PET_SIZE       = 200;   // ´°¿ÚÏÔÊ¾³ß´ç (Ô­ 512 ËõĞ¡Ô¼ 2.5 ±¶)
-constexpr int PET_IMG_SIZE   = 128;   // ËØ²ÄÍ¼Æ¬³ß´ç (½¨ÒéÊ¹ÓÃ·½ĞÎ PNG)
+constexpr int PET_SIZE       = 200;   // çª—å£æ˜¾ç¤ºå°ºå¯¸ (åŸ 512 ç¼©å°çº¦ 2.5 å€)
+constexpr int PET_IMG_SIZE   = 128;   // ç´ æå›¾ç‰‡å°ºå¯¸ (å»ºè®®ä½¿ç”¨æ–¹å½¢ PNG)
 
 // ============================================================
-// ĞĞÎª²ÎÊı
+// è¡Œä¸ºå‚æ•°
 // ============================================================
-constexpr int ANIM_INTERVAL   = 300;   // ¶¯»­Ö¡¼ä¸ô (ms)
-constexpr int STATE_CHANGE_MS = 5000;  // ×´Ì¬ÇĞ»»¼ä¸ô (ms)
-constexpr int MOVE_SPEED_MIN  = 2;     // ×îĞ¡ÒÆ¶¯ËÙ¶È
-constexpr int MOVE_SPEED_MAX  = 5;     // ×î´óÒÆ¶¯ËÙ¶È
-constexpr int TRIGGER_DURATION= 3000;  // ´¥·¢¶¯»­³ÖĞøÊ±¼ä (ms)
+constexpr int ANIM_INTERVAL   = 300;   // åŠ¨ç”»å¸§é—´éš” (ms)
+constexpr int STATE_CHANGE_MS = 5000;  // çŠ¶æ€åˆ‡æ¢é—´éš” (ms)
+constexpr int TRIGGER_DURATION= 3000;  // è§¦å‘åŠ¨ç”»æŒç»­æ—¶é—´ (ms)
 
 // ============================================================
-// ÒõÓ°²ÎÊı
+// ç‰©ç†å‚æ•° (é€Ÿåº¦å•ä½ px/s)
+// ============================================================
+constexpr double GRAVITY_ACCEL    = 1200.0;  // é‡åŠ›åŠ é€Ÿåº¦
+constexpr double MAX_FALL_SPEED   = 1400.0;  // æœ€å¤§ä¸‹è½é€Ÿåº¦
+constexpr double FLOOR_FRICTION   = 0.78;    // è½åœ°æ‘©æ“¦ (æ¯ tick)
+constexpr double AIR_FRICTION     = 0.985;   // ç©ºä¸­æ‘©æ“¦ (æ¯ tick)
+constexpr double WALL_RESTITUTION = 0.45;    // æ’å¢™åå¼¹ç³»æ•°
+constexpr double MAX_THROW_SPEED  = 1600.0;  // ç”©å‡ºæœ€å¤§é€Ÿåº¦
+constexpr double JUMP_VELOCITY    = -520.0;  // è·³è·ƒåˆé€Ÿåº¦
+constexpr double WALK_SPEED_MIN   = 60.0;    // åœ°é¢è¡Œèµ°æœ€å°é€Ÿåº¦
+constexpr double WALK_SPEED_MAX   = 160.0;   // åœ°é¢è¡Œèµ°æœ€å¤§é€Ÿåº¦
+
+// ============================================================
+// ç¡çœ  / é—²èŠå‚æ•°
+// ============================================================
+constexpr int SLEEP_AFTER_MS   = 20000;   // é—²ç½®å¤šä¹…åå…¥ç¡
+constexpr int IDLE_LINE_MIN_MS = 12000;   // é—²èŠæœ€å°é—´éš”
+constexpr int IDLE_LINE_MAX_MS = 35000;   // é—²èŠæœ€å¤§é—´éš”
+constexpr int BUBBLE_GAP       = 6;       // æ°”æ³¡ä¸å® ç‰©é—´è·
+constexpr int HOVER_PET_MS     = 1500;    // æ‚¬åœæŠšæ‘¸é—´éš” (æ¯ 1.5s +1 å¥½æ„Ÿåº¦)
+
+// ============================================================
+// é˜´å½±å‚æ•° (é¢„ç•™)
 // ============================================================
 constexpr int SHADOW_LEFT    = 3;
 constexpr int SHADOW_BOTTOM  = 9;
@@ -34,8 +54,8 @@ constexpr int SHADOW_RIGHT   = 3;
 constexpr int SHADOW_HEIGHT  = 3;
 
 // ============================================================
-// ¾«ÁéÎÄ¼ş»ù´¡Â·¾¶ (²»´øÀ©Õ¹Ãû, ×Ô¶¯ .gif ÓÅÏÈ ¡ú .png »ØÍË)
-// ÓÃ»§¿ÉÌæ»» assets/ ÏÂµÄ .gif »ò .png ÎÄ¼ş×Ô¶¨Òå½ÇÉ«
+// ç²¾çµæ–‡ä»¶åŸºç¡€è·¯å¾„ (ä¸å¸¦æ‰©å±•å, è‡ªåŠ¨ .gif ä¼˜å…ˆ â†’ .png å›é€€)
+// ç”¨æˆ·å¯æ›¿æ¢ assets/ ä¸‹çš„ .gif æˆ– .png æ–‡ä»¶è‡ªå®šä¹‰è§’è‰²
 // ============================================================
 inline const QString SPRITE_IDLE   = QStringLiteral("assets/sprite_idle");
 inline const QString SPRITE_BLINK  = QStringLiteral("assets/sprite_blink");
@@ -45,13 +65,13 @@ inline const QString SPRITE_SIT    = QStringLiteral("assets/sprite_sit");
 inline const QString TRIGGER_DIR   = QStringLiteral("assets/triggers");
 
 // ============================================================
-// GIF Ä£Ê½¾«ÁéÂ·¾¶
+// GIF æ¨¡å¼ç²¾çµè·¯å¾„
 // ============================================================
 inline const QString SPRITE_STAND  = QStringLiteral("assets/stand");
 inline const QString SPRITE_CREEP  = QStringLiteral("assets/creep");
 
 // ============================================================
-// Trigger ÏÔÊ¾Ãû³ÆÓ³Éä
+// Trigger æ˜¾ç¤ºåç§°æ˜ å°„
 // ============================================================
 inline QString triggerDisplayName(const QString& internalName) {
     if (internalName == "koishi") return QStringLiteral("koishi_cute");
@@ -59,11 +79,11 @@ inline QString triggerDisplayName(const QString& internalName) {
 }
 
 // ============================================================
-// ºÃ¸Ğ¶ÈãĞÖµ¶Ô»° (20/40/60/80/100)
+// å¥½æ„Ÿåº¦é˜ˆå€¼å¯¹è¯ (20/40/60/80/100)
 // ============================================================
-constexpr int AFFECTION_PER_MINUTE = 5;   // Ã¿·ÖÖÓÔö¼ÓºÃ¸Ğ¶È
-constexpr int AFFECTION_MAX        = 100;  // ºÃ¸Ğ¶ÈÉÏÏŞ
-constexpr int BUBBLE_DURATION_MS   = 3000; // ÆøÅİÏÔÊ¾Ê±¼ä (ms)
+constexpr int AFFECTION_PER_MINUTE = 5;   // æ¯åˆ†é’Ÿå¢åŠ å¥½æ„Ÿåº¦
+constexpr int AFFECTION_MAX        = 100;  // å¥½æ„Ÿåº¦ä¸Šé™
+constexpr int BUBBLE_DURATION_MS   = 3000; // æ°”æ³¡æ˜¾ç¤ºæ—¶é—´ (ms)
 
 inline QString affectionDialogue(int affection) {
     if (affection >= 100) return QStringLiteral("\u5982\u679c\u662f\u4f60\u7684\u8bdd\u2026\u4e00\u5b9a\u4e0d\u4f1a\u5fd8\u8bb0\u6211\u5427\u2026\u2665 \u59d0\u59d0\u2026\u6211\u597d\u50cf\u2026\u6709\u4e86\u91cd\u8981\u7684\u4eba\u4e86\u2026");
@@ -75,20 +95,106 @@ inline QString affectionDialogue(int affection) {
 }
 
 // ============================================================
-// ÏÔÊ¾Ä£Ê½Ã¶¾Ù
+// é—²èŠå°è¯æ±  (å‘å‘†æ—¶éšæœºå†’æ³¡)
+// ============================================================
+inline int idleDialogueCount() { return 16; }
+
+inline QString idleDialogue(int index) {
+    static const QString lines[] = {
+        QStringLiteral("\u2026\u2026\uff1f"),
+        QStringLiteral("\u3042\u308c\u2026\uff1f"),
+        QStringLiteral("\u3053\u3044\u3057\u2026\u3053\u3044\u3057\u2026"),
+        QStringLiteral("\u2026\u2026\u4f60\u80fd\u770b\u89c1\u6211\u5417\u2026\uff1f"),
+        QStringLiteral("\u59d0\u59d0\u2026\u597d\u60f3\u59d0\u59d0\u2026"),
+        QStringLiteral("\u8def\u8fb9\u7684\u5c0f\u77f3\u5b50\u2026\u4e5f\u4f1a\u7d2f\u7684\u2026"),
+        QStringLiteral("\u4eca\u5929\u2026\u4e5f\u8bf7\u591a\u5173\u7167\u2026"),
+        QStringLiteral("\u547c\u547c\u2026"),
+        QStringLiteral("\u6211\u662f\u2026\u53e4\u660e\u5730\u604b\u2026"),
+        QStringLiteral("\u2026\u2026\uff01\uff1f"),
+        QStringLiteral("\u2026\u2026\u597d\u5b89\u9759\u2026\u2026"),
+        QStringLiteral("\u4f60\u8fd8\u5728\u5417\u2026\u2026\uff1f"),
+        QStringLiteral("\u604b\u604b\u2026\u2026\u6709\u70b9\u60f3\u4f60\u4e86\u2026\u2026"),
+        QStringLiteral("\u5c0f\u77f3\u5b50\u2026\u2026\u5728\u54ea\u91cc\u2026\u2026"),
+        QStringLiteral("\uff08\u5de6\u53f3\u5f20\u671b\uff09"),
+        QStringLiteral("\u547c\u2026\u2026\u8212\u670d\u2026\u2026"),
+    };
+    int n = static_cast<int>(sizeof(lines) / sizeof(lines[0]));
+    return lines[((index % n) + n) % n];
+}
+
+// ============================================================
+// æ—¶æ®µé—®å€™ (æ¯å°æ—¶ç¬¬ä¸€æ¬¡ç‚¹å‡»)
+// ============================================================
+inline QString timeGreeting(int hour) {
+    if (hour >= 5 && hour <= 9)   return QStringLiteral("\u65e9\u4e0a\u597d\u2026\u4eca\u5929\u4e5f\u8981\u52a0\u6cb9\u54e6\u2665");
+    if (hour >= 10 && hour <= 13) return QStringLiteral("\u5348\u5b89\u2026\u8bb0\u5f97\u5403\u996d\u2026");
+    if (hour >= 14 && hour <= 17) return QStringLiteral("\u4e0b\u5348\u597d\u2026\u4f60\u7d2f\u4e86\u5417\uff1f");
+    if (hour >= 18 && hour <= 22) return QStringLiteral("\u665a\u4e0a\u597d\u2026\u4eca\u5929\u8f9b\u82e6\u4e86\u2026");
+    return QStringLiteral("\u591c\u6df1\u4e86\u2026\u65e9\u70b9\u4f11\u606f\u5427\u2026");
+}
+
+// ============================================================
+// ä»Šæ—¥è¿åŠ¿ (æŠ½ç­¾)
+// ============================================================
+inline int fortuneCount() { return 8; }
+
+inline QString fortuneLine(int index) {
+    static const QString lines[] = {
+        QStringLiteral("\u5927\u5409 \u2605\n\u4eca\u5929\u4e5f\u4f1a\u88ab\u604b\u604b\u8bb0\u4f4f\u54e6\u2665"),
+        QStringLiteral("\u4e2d\u5409\n\u9002\u5408\u53d1\u5446\uff0c\u50cf\u604b\u604b\u4e00\u6837"),
+        QStringLiteral("\u5c0f\u5409\n\u8def\u8fb9\u7684\u5c0f\u77f3\u5b50\u4eca\u5929\u4e5f\u95ea\u95ea\u53d1\u5149"),
+        QStringLiteral("\u5409\n\u4f1a\u6709\u5c0f\u5c0f\u7684\u597d\u4e8b\u53d1\u751f"),
+        QStringLiteral("\u672b\u5409\n\u6162\u6162\u6765\uff0c\u604b\u604b\u4f1a\u7b49\u4f60"),
+        QStringLiteral("\u51f6\n\u2026\uff1f\u6ca1\u5173\u7cfb\u7684\uff0c\u604b\u604b\u966a\u7740\u4f60"),
+        QStringLiteral("\u5927\u51f6\n\u4e0d\u7ba1\u53d1\u751f\u4ec0\u4e48\uff0c\u604b\u604b\u90fd\u4e0d\u4f1a\u5fd8\u8bb0\u4f60"),
+        QStringLiteral("\u604b\u604b\u5409 \u2605\n\u88ab\u604b\u604b\u9009\u4e2d\u4e86\uff01\u4eca\u5929\u6574\u5929\u6709\u4eba\u966a"),
+    };
+    int n = static_cast<int>(sizeof(lines) / sizeof(lines[0]));
+    return lines[((index % n) + n) % n];
+}
+
+// ============================================================
+// è¿å‡»æˆ³æˆ³ååº”
+// ============================================================
+inline QString comboLine(int index) {
+    static const QString lines[] = {
+        QStringLiteral("\u545c\u54c7\u2026\u88ab\u4f60\u6233\u6655\u4e86\u5566\u2026\u4f46\u662f\u2026\u597d\u5f00\u5fc3\u2026\u2665"),
+        QStringLiteral("\u522b\u3001\u522b\u6233\u90a3\u4e48\u5feb\u5566\u2026\u604b\u604b\u8981\u8f6c\u5708\u5708\u4e86\u2026"),
+        QStringLiteral("\u5535\u2026\u4f60\u597d\u559c\u6b22\u604b\u604b\u5462\u2026"),
+    };
+    int n = static_cast<int>(sizeof(lines) / sizeof(lines[0]));
+    return lines[((index % n) + n) % n];
+}
+
+// ============================================================
+// æˆå°±é‡Œç¨‹ç¢‘å°è¯
+// ============================================================
+inline QString achievementDialogue(qint64 total) {
+    if (total >= 5000) return QStringLiteral("\u2026\u604b\u604b\u5df2\u7ecf\u6570\u4e0d\u6e05\u8fd9\u662f\u7b2c\u51e0\u6b21\u4e86\u2026\u8c22\u8c22\u4f60\u2026");
+    if (total >= 1000) return QStringLiteral("\u4e00\u5343\u6b21\u2026\u4f60\u2026\u771f\u7684\u4e0d\u4f1a\u5fd8\u8bb0\u6211\u5417\u2026");
+    if (total >= 500)  return QStringLiteral("\u5df2\u7ecf\u4e94\u767e\u6b21\u4e86\u5462\u2026");
+    if (total >= 100)  return QStringLiteral("\u4e00\u767e\u6b21\u2026\u4f60\u597d\u6e29\u67d4\u2026");
+    if (total >= 50)   return QStringLiteral("\u4e94\u5341\u6b21\u4e86\u2026\u4f60\u771f\u7684\u5f88\u559c\u6b22\u604b\u604b\u5462\u2026");
+    if (total >= 10)   return QStringLiteral("\u5341\u6b21\u4e86\u2026\u4f60\u2026\u662f\u5728\u627e\u6211\u5417\uff1f");
+    return QString();
+}
+
+// ============================================================
+// æ˜¾ç¤ºæ¨¡å¼æšä¸¾
 // ============================================================
 enum class PetMode {
-    SPRITE_MODE,  // ¶àÖ¡ PNG ¾«ÁéÄ£Ê½
-    GIF_MODE      // stand.gif + creep.gif Ä£Ê½
+    SPRITE_MODE,  // å¤šå¸§ PNG ç²¾çµæ¨¡å¼
+    GIF_MODE      // stand.gif + creep.gif æ¨¡å¼
 };
 
 // ============================================================
-// ³èÎï×´Ì¬Ã¶¾Ù
+// å® ç‰©çŠ¶æ€æšä¸¾
 // ============================================================
 enum class PetState {
     IDLE,
     WALKING,
     SITTING,
+    SLEEPING,
     TRIGGER
 };
 

@@ -7,7 +7,7 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-add_executable(deskpet-qt WIN32
+add_executable(KoishiPet WIN32
     main.cpp
     petwindow.cpp
     petwindow.h
@@ -16,13 +16,13 @@ add_executable(deskpet-qt WIN32
     pet_state.h
 )
 
-target_include_directories(deskpet-qt PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(KoishiPet PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 
-target_link_libraries(deskpet-qt PRIVATE Qt6::Widgets)
+target_link_libraries(KoishiPet PRIVATE Qt6::Widgets)
 
-# ¸´ÖÆ assets Ä¿Â¼µ½¹¹½¨Ä¿Â¼
-add_custom_command(TARGET deskpet-qt POST_BUILD
+# å¤åˆ¶ assets ç›®å½•åˆ°æ„å»ºç›®å½•
+add_custom_command(TARGET KoishiPet POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory
     ${CMAKE_SOURCE_DIR}/assets
-    $<TARGET_FILE_DIR:deskpet-qt>/assets
+    $<TARGET_FILE_DIR:KoishiPet>/assets
 )
